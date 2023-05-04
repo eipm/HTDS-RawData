@@ -33,7 +33,7 @@ The base URL for all API endpoints is: `https://api.example.com`
   "field1": "value1",
   "field2": "value2"
 }
-# Response
+ Response
 . Success Response:
 . Code: 200
 . Content:
@@ -41,5 +41,5 @@ The base URL for all API endpoints is: `https://api.example.com`
   "field1": "value1",
   "field2": "value2"
 }
-# Example Usage
+ Example Usage
 curl -X HTTP_METHOD -H "Content-Type: application/json" -d '{"field1": "value1", "field2": "value2"}' https://api.example.com/api/endpoint
