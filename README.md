@@ -1,10 +1,8 @@
 # HTDS-RawData
 Experimental data structuring and analysis.
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 ## Overview
-A brief description of the HTDS Raw Data repository and its purpose.
+MATLAB scripts used to restructure raw data before performing further analysis in GraphPad Prism.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -14,7 +12,8 @@ A brief description of the HTDS Raw Data repository and its purpose.
 - [License](#license)
 
 ## Installation
-Instructions on how to install or set up the project, including any dependencies.
+- Must have MATLAB installed and the license must be obtained. The license is provided by Cornell here: https://library.weill.cornell.edu/node/1053
+- If using Visual Studio code then MATLAB is still required and the official Mathworks MATLAB extension for Visual studio can be utilized.
 
 ## Usage
 Guidelines and examples demonstrating how to use the HTDS Raw Data repository.
