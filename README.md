@@ -20,7 +20,7 @@ Guidelines and examples demonstrating how to use the HTDS Raw Data repository.
 
 ## Documentation
 - [API Reference](/docs/api_reference.md): Detailed documentation on the repository's API.
-- [Getting Started Guide](/docs/getting_started.md): Step-by-step instructions for beginners.
+- [Code Explanation](/docs/Code-Explanation.md): Step-by-step code explanation.
 - [Configuration Options](/docs/configuration.md): Information on customizing and configuring the repository.
 
 ## Contributing
