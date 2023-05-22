@@ -14,176 +14,183 @@ for file in files:
     filepath = os.path.join(input_folder, file)
     T = pd.read_excel(filepath)
 
+    # Flip the rows of the table from row to row
+    T.iloc[150:280, :] = T.iloc[150:280, :].iloc[::-1]
+    T.iloc[430:560, :] = T.iloc[430:560, :].iloc[::-1]
+    T.iloc[710:840, :] = T.iloc[710:840, :].iloc[::-1]
+    T.iloc[990:1120, :] = T.iloc[990:1120, :].iloc[::-1]
+    T.iloc[1270:1400, :] = T.iloc[1270:1400, :].iloc[::-1]
+    T.iloc[1550:1680, :] = T.iloc[1550:1680, :].iloc[::-1]
+
     # Get the unique values in the 'PlateName' column using the unique function
     unique_plate_names = T['Plate Name'].unique()
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if T.loc[n, 'Concentration'] == 1.111:
+            T.loc[n, 'Concentration'] = 1.1111
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if T.loc[n, 'Concentration'] == 1.111:
-        T.loc[n, 'Concentration'] = 1.1111
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if T.loc[n, 'Concentration'] == 3.333333333:
+            T.loc[n, 'Concentration'] = 3.333
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if T.loc[n, 'Concentration'] == 3.333333333:
-        T.loc[n, 'Concentration'] = 3.333
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 10
+            and (
+                T.loc[n-9, 'Concentration'] == 0.000508053
+                or T.loc[n-9, 'Concentration'] == 0.000508052634252908
+                or T.loc[n-9, 'Concentration'] == 0.000508
+                or T.loc[n-9, 'Concentration'] == 0.00050805
+            )
+            and (
+                T.loc[n-1, 'Concentration'] == 3.333
+                or T.loc[n-1, 'Concentration'] == 3.333333333
+            )
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n-9:n-1, 'Concentration'] = [
+                0.000508053, 0.001524158, 0.004572474, 0.013717421,
+                0.041152263, 0.1234679, 0.37037037, 1.111111111, 3.333333333
+            ]
+            T.loc[n, 'Concentration'] = 10
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 10
-        and (
-            T.loc[n-9, 'Concentration'] == 0.000508053
-            or T.loc[n-9, 'Concentration'] == 0.000508052634252908
-            or T.loc[n-9, 'Concentration'] == 0.000508
-            or T.loc[n-9, 'Concentration'] == 0.00050805
-        )
-        and (
-            T.loc[n-1, 'Concentration'] == 3.333
-            or T.loc[n-1, 'Concentration'] == 3.333333333
-        )
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n-9:n-1, 'Concentration'] = [
-            0.000508053, 0.001524158, 0.004572474, 0.013717421,
-            0.041152263, 0.1234679, 0.37037037, 1.111111111, 3.333333333
-        ]
-        T.loc[n, 'Concentration'] = 10
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 30
+            and T.loc[n-1, 'Concentration'] == 10
+            and (
+                T.loc[n-9, 'Concentration'] != 0.000508
+                or T.loc[n-9, 'Concentration'] != 0.000508053
+                and T.loc[n-9, 'Concentration'] != 0.000508052634252908
+            )
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n-9, 'Concentration'] = 0.00152401
+            T.loc[n-8, 'Concentration'] = 0.00457201
+            T.loc[n-7, 'Concentration'] = 0.01371701
+            T.loc[n-6, 'Concentration'] = 0.04115201
+            T.loc[n-5, 'Concentration'] = 0.1234601
+            T.loc[n-4, 'Concentration'] = 0.3703701
+            T.loc[n-3, 'Concentration'] = 1.111101
+            T.loc[n-2, 'Concentration'] = 3.33301
+            T.loc[n-1, 'Concentration'] = 10.01
+            T.loc[n, 'Concentration'] = 30
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 30
-        and T.loc[n-1, 'Concentration'] == 10
-        and (
-            T.loc[n-9, 'Concentration'] != 0.000508
-            or T.loc[n-9, 'Concentration'] != 0.000508053
-            and T.loc[n-9, 'Concentration'] != 0.000508052634252908
-        )
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n-9, 'Concentration'] = 0.00152401
-        T.loc[n-8, 'Concentration'] = 0.00457201
-        T.loc[n-7, 'Concentration'] = 0.01371701
-        T.loc[n-6, 'Concentration'] = 0.04115201
-        T.loc[n-5, 'Concentration'] = 0.1234601
-        T.loc[n-4, 'Concentration'] = 0.3703701
-        T.loc[n-3, 'Concentration'] = 1.111101
-        T.loc[n-2, 'Concentration'] = 3.33301
-        T.loc[n-1, 'Concentration'] = 10.01
-        T.loc[n, 'Concentration'] = 30
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 1
+            and T.loc[n-1, 'Concentration'] == 0.333333333
+            and (
+                T.loc[n-9, 'Concentration'] == 0.0000508053
+                or T.loc[n-9, 'Concentration'] == 0.0000508
+            )
+            and T.loc[n-8, 'Concentration'] == 0.000152416
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n-9, 'Concentration'] = 0.0000508053
+            T.loc[n-8, 'Concentration'] = 0.000152416
+            T.loc[n-7, 'Concentration'] = 0.0004572
+            T.loc[n-6, 'Concentration'] = 0.0013717
+            T.loc[n-5, 'Concentration'] = 0.0041152
+            T.loc[n-4, 'Concentration'] = 0.012346
+            T.loc[n-3, 'Concentration'] = 0.037037
+            T.loc[n-2, 'Concentration'] = 0.111
+            T.loc[n-1, 'Concentration'] = 0.333
+            T.loc[n, 'Concentration'] = 1
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 1
-        and T.loc[n-1, 'Concentration'] == 0.333333333
-        and (
-            T.loc[n-9, 'Concentration'] == 0.0000508053
-            or T.loc[n-9, 'Concentration'] == 0.0000508
-        )
-        and T.loc[n-8, 'Concentration'] == 0.000152416
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n-9, 'Concentration'] = 0.0000508053
-        T.loc[n-8, 'Concentration'] = 0.000152416
-        T.loc[n-7, 'Concentration'] = 0.0004572
-        T.loc[n-6, 'Concentration'] = 0.0013717
-        T.loc[n-5, 'Concentration'] = 0.0041152
-        T.loc[n-4, 'Concentration'] = 0.012346
-        T.loc[n-3, 'Concentration'] = 0.037037
-        T.loc[n-2, 'Concentration'] = 0.111
-        T.loc[n-1, 'Concentration'] = 0.333
-        T.loc[n, 'Concentration'] = 1
+    # Check order
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 0.03
+            and T.loc[n-1, 'Concentration'] == 0.01
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n-9, 'Concentration'] = 0.00000152
+            T.loc[n-8, 'Concentration'] = 0.00000457
+            T.loc[n-7, 'Concentration'] = 0.0000137
+            T.loc[n-6, 'Concentration'] = 0.0000412
+            T.loc[n-5, 'Concentration'] = 0.000123457
+            T.loc[n-4, 'Concentration'] = 0.00037037
+            T.loc[n-3, 'Concentration'] = 0.001111111
+            T.loc[n-2, 'Concentration'] = 0.003333333
+            T.loc[n-1, 'Concentration'] = 0.01
+            T.loc[n, 'Concentration'] = 0.03
 
-# Check order
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 0.03
-        and T.loc[n-1, 'Concentration'] == 0.01
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n-9, 'Concentration'] = 0.00000152
-        T.loc[n-8, 'Concentration'] = 0.00000457
-        T.loc[n-7, 'Concentration'] = 0.0000137
-        T.loc[n-6, 'Concentration'] = 0.0000412
-        T.loc[n-5, 'Concentration'] = 0.000123457
-        T.loc[n-4, 'Concentration'] = 0.00037037
-        T.loc[n-3, 'Concentration'] = 0.001111111
-        T.loc[n-2, 'Concentration'] = 0.003333333
-        T.loc[n-1, 'Concentration'] = 0.01
-        T.loc[n, 'Concentration'] = 0.03
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 0.1
+            and (
+                T.loc[n-1, 'Concentration'] == 0.03333333
+                or T.loc[n-1, 'Concentration'] == 0.033333333
+            )
+            and T.loc[n-9, 'Concentration'] == 0.00000508053
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n-9, 'Concentration'] = 0.00000508053
+            T.loc[n-8, 'Concentration'] = 0.0000152416
+            T.loc[n-7, 'Concentration'] = 0.0000457247
+            T.loc[n-6, 'Concentration'] = 0.000137174
+            T.loc[n-5, 'Concentration'] = 0.000411523
+            T.loc[n-4, 'Concentration'] = 0.001234568
+            T.loc[n-3, 'Concentration'] = 0.003703704
+            T.loc[n-2, 'Concentration'] = 0.011111111
+            T.loc[n-1, 'Concentration'] = 0.03333333
+            T.loc[n, 'Concentration'] = 0.1
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 0.1
-        and (
-            T.loc[n-1, 'Concentration'] == 0.03333333
-            or T.loc[n-1, 'Concentration'] == 0.033333333
-        )
-        and T.loc[n-9, 'Concentration'] == 0.00000508053
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n-9, 'Concentration'] = 0.00000508053
-        T.loc[n-8, 'Concentration'] = 0.0000152416
-        T.loc[n-7, 'Concentration'] = 0.0000457247
-        T.loc[n-6, 'Concentration'] = 0.000137174
-        T.loc[n-5, 'Concentration'] = 0.000411523
-        T.loc[n-4, 'Concentration'] = 0.001234568
-        T.loc[n-3, 'Concentration'] = 0.003703704
-        T.loc[n-2, 'Concentration'] = 0.011111111
-        T.loc[n-1, 'Concentration'] = 0.03333333
-        T.loc[n, 'Concentration'] = 0.1
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 6
+            and T.loc[n-1, 'Concentration'] == 2
+            and T.loc[n-9, 'Concentration'] == 0.000304832
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+        ):
+            T.loc[n, 'Concentration'] = 6
+            T.loc[n-1, 'Concentration'] = 2
+            T.loc[n-2, 'Concentration'] = 0.666666667
+            T.loc[n-3, 'Concentration'] = 0.222222222
+            T.loc[n-4, 'Concentration'] = 0.074074074
+            T.loc[n-5, 'Concentration'] = 0.024691358
+            T.loc[n-6, 'Concentration'] = 0.008230453
+            T.loc[n-7, 'Concentration'] = 0.002743484
+            T.loc[n-8, 'Concentration'] = 0.000914495
+            T.loc[n-9, 'Concentration'] = 0.000304832
 
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 6
-        and T.loc[n-1, 'Concentration'] == 2
-        and T.loc[n-9, 'Concentration'] == 0.000304832
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-    ):
-        T.loc[n, 'Concentration'] = 6
-        T.loc[n-1, 'Concentration'] = 2
-        T.loc[n-2, 'Concentration'] = 0.666666667
-        T.loc[n-3, 'Concentration'] = 0.222222222
-        T.loc[n-4, 'Concentration'] = 0.074074074
-        T.loc[n-5, 'Concentration'] = 0.024691358
-        T.loc[n-6, 'Concentration'] = 0.008230453
-        T.loc[n-7, 'Concentration'] = 0.002743484
-        T.loc[n-8, 'Concentration'] = 0.000914495
-        T.loc[n-9, 'Concentration'] = 0.000304832
-
-# Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
-for n in range(len(T)-1):
-    if (
-        T.loc[n, 'Concentration'] == 3
-        and T.loc[n-1, 'Concentration'] == 1
-        and (
-            T.loc[n-9, 'Concentration'] == 0.000152416
-            or T.loc[n-9, 'Concentration'] == 0.0001524
-        )
-        and not pd.isna(T.loc[n, 'Lum'])
-        and not pd.isna(T.loc[n-1, 'Lum'])
-        and T.loc[n-9, 'Concentration'] != 0.0000508
-    ):
-        T.loc[n-9, 'Concentration'] = 0.00015242
-        T.loc[n-8, 'Concentration'] = 0.000457247
-        T.loc[n-7, 'Concentration'] = 0.001371742
-        T.loc[n-6, 'Concentration'] = 0.004115227
-        T.loc[n-5, 'Concentration'] = 0.012345671
-        T.loc[n-4, 'Concentration'] = 0.03703671
-        T.loc[n-3, 'Concentration'] = 0.1111109
-        T.loc[n-2, 'Concentration'] = 0.33333301
-        T.loc[n-1, 'Concentration'] = 1
-        T.loc[n, 'Concentration'] = 3
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
+    for n in range(len(T)-1):
+        if (
+            T.loc[n, 'Concentration'] == 3
+            and T.loc[n-1, 'Concentration'] == 1
+            and (
+                T.loc[n-9, 'Concentration'] == 0.000152416
+                or T.loc[n-9, 'Concentration'] == 0.0001524
+            )
+            and not pd.isna(T.loc[n, 'Lum'])
+            and not pd.isna(T.loc[n-1, 'Lum'])
+            and T.loc[n-9, 'Concentration'] != 0.0000508
+        ):
+            T.loc[n-9, 'Concentration'] = 0.00015242
+            T.loc[n-8, 'Concentration'] = 0.000457247
+            T.loc[n-7, 'Concentration'] = 0.001371742
+            T.loc[n-6, 'Concentration'] = 0.004115227
+            T.loc[n-5, 'Concentration'] = 0.012345671
+            T.loc[n-4, 'Concentration'] = 0.03703671
+            T.loc[n-3, 'Concentration'] = 0.1111109
+            T.loc[n-2, 'Concentration'] = 0.33333301
+            T.loc[n-1, 'Concentration'] = 1
+            T.loc[n, 'Concentration'] = 3
 
     # Loop through each unique plate name value
     for plate_name in unique_plate_names:
