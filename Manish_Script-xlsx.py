@@ -5,24 +5,21 @@ import pandas as pd
 input_folder = r'C:\Users\oma4008\OneDrive - med.cornell.edu\Desktop\Data Analysis\Manish\Input Python'
 output_folder = r'C:\Users\oma4008\OneDrive - med.cornell.edu\Desktop\Data Analysis\Manish\Output'
 
-# Use the os.listdir() function to get a list of files in the input folder with the extension '.csv'
-files = [f for f in os.listdir(input_folder) if f.endswith('.csv')]
+# Use the os.listdir() function to get a list of files in the input folder with the extension '.xlsx'
+files = [f for f in os.listdir(input_folder) if f.endswith('.xlsx')]
 
 # Loop through each file in the input folder
 for file in files:
-
-    # Read the current file into a DataFrame using read_csv function
+    # Read the current file into a DataFrame using read_excel function
     filepath = os.path.join(input_folder, file)
-    T = pd.read_csv(filepath)
-
-     # Split the data into separate dataframes
+    T = pd.read_excel(filepath)
+    
+    # Split the data into separate dataframes
     dfs = []
     for i in range(0, len(T), 10):
         dfs.append(T.iloc[i:i+10])
-
     # Concatenate the dataframes and reset the index
     T = pd.concat(dfs, ignore_index=True)
-    
     # Flip the rows of the table from row to row
     T.iloc[150:280, :] = T.iloc[150:280, :].iloc[::-1]
     T.iloc[430:560, :] = T.iloc[430:560, :].iloc[::-1]
@@ -30,10 +27,9 @@ for file in files:
     T.iloc[990:1120, :] = T.iloc[990:1120, :].iloc[::-1]
     T.iloc[1270:1400, :] = T.iloc[1270:1400, :].iloc[::-1]
     T.iloc[1550:1680, :] = T.iloc[1550:1680, :].iloc[::-1]
-
+    
     # Get the unique values in the 'PlateName' column using the unique function
     unique_plate_names = T['Plate Name'].unique()
-
     # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition
     for n in range(len(T)-1):
         if T.loc[n, 'Concentration'] == 1.111:
@@ -202,6 +198,7 @@ for file in files:
             T.loc[n-1, 'Concentration'] = 1.01
             T.loc[n, 'Concentration'] = 3
 
+    # Loop through each row of the table and replace values in the 'Concentration' column that meet the specified condition.
     for n in range(len(T['Concentration']) - 1):
         if T['Concentration'][n] == 0.12345679:
             T.at[n, 'Concentration'] = 0.1234679
@@ -215,6 +212,7 @@ for file in files:
     for n in range(len(T['Concentration']) - 1):
         if T['Concentration'][n] == 3.333333333:
             T.at[n, 'Concentration'] = 3.333
+
 
     # Loop through each unique plate name value
     for plate_name in unique_plate_names:
@@ -261,13 +259,13 @@ for file in files:
         output_data.iloc[3:, 1:] = Lum_values.values
 
         # Add an empty row after every 10 rows of data (excluding the first three rows and the newly added rows)
-        # Add an empty row after every 10 rows of data (excluding the first three rows and the newly added rows)
         for f in range(4, min(output_data.shape[0], 200)):
             if (f - 4) % 12 == 0 and f > 3:
                 output_data = pd.concat([output_data.iloc[:f, :], pd.DataFrame(index=range(2),
                                                                             columns=output_data.columns),
                                         output_data.iloc[f:, :]], ignore_index=True)
-                
+
+
         # Define the output file name based on the current plate name
         output_file = os.path.join(output_folder, plate_name + '.csv')
 
