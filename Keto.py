@@ -7,9 +7,13 @@ output_folder = r'C:\Users\oma4008\OneDrive - med.cornell.edu\Desktop\Data Analy
 
 # Use the os.listdir() function to get a list of files in the input folder with the extension '.csv'
 files = [f for f in os.listdir(input_folder) if f.endswith('.csv')]
+print(files)
 
 # Loop through each file in the input folder
 for file in files:
+
+    # Print a message indicating which file is being processed
+    print(f'Processing file {file}')
 
     # Read the current file into a DataFrame using read_csv function
     filepath = os.path.join(input_folder, file)
