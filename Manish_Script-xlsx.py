@@ -139,7 +139,7 @@ for file in files:
                 T.loc[n-1, 'Concentration'] == 0.03333333
                 or T.loc[n-1, 'Concentration'] == 0.033333333
             )
-            and T.loc[n-9, 'Concentration'] == 0.00000508053
+            and T.loc[n-9, 'Concentration'] == 0.00000508
             and not pd.isna(T.loc[n, 'Lum'])
             and not pd.isna(T.loc[n-1, 'Lum'])
         ):
