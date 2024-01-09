@@ -2,7 +2,7 @@
 Experimental data structuring and analysis.
 
 ## Overview
-MATLAB scripts that were translated into Python, used to restructure raw data before performing further analysis in GraphPad Prism.
+MATLAB scripts that were translated into Python, used to restructure raw data before performing further analysis in GraphPad Prism or SynergyFinder.
 
 ## Table of Contents
 - [Installation](#installation)
