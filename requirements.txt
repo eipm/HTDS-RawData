@@ -1,0 +1,5 @@
+pandas==1.4.1
+# Replace 1.4.1 with the specific version you need
+# Add other dependencies with their versions here
+- name: Install dependencies
+  run: pip install -r requirements.txt
